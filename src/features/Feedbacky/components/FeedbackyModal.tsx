@@ -1,7 +1,7 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -88,18 +88,20 @@ export const FeedbackyModal = ({ open, setOpen }: FeedbackyModalProps) => {
       fullWidth
     >
       <DialogTitle>
-        <IconButton
-          data-testid="modal-close-button"
-          disabled={createFeedback.isLoading}
-          sx={{ padding: 0 }}
-          onClick={handleCloseModal}
-        >
-          <CloseIcon sx={{ fontSize: { mobile: "30px", desktop: "40px" } }} />
-        </IconButton>
+        <Stack sx={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <IconButton
+            data-testid="modal-close-button"
+            disabled={createFeedback.isLoading}
+            sx={{ padding: 0 }}
+            onClick={handleCloseModal}
+          >
+            <CloseIcon sx={{ fontSize: { mobile: "30px", desktop: "40px" } }} />
+          </IconButton>
+        </Stack>
       </DialogTitle>
       <form
         onSubmit={handleSubmit((data) => {
-          void createFeedback.mutate(data);
+          createFeedback.mutate(data);
         })}
       >
         {formStep === FormStatus.dataEntry && (
