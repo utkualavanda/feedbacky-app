@@ -72,8 +72,8 @@ https://docs.google.com/spreadsheets/d/1Zwhbf3z0PTEPRmXPFUhKhay90djCCLNfs9oX56wh
 
 Test coverage report path 'coverage/index.html'.
 
-![](public/readme_images/Coverage_Image.PNG)
+![](public/coverage.PNG)
 
 ## SonarQube Result
 
-![](public/readme_images/Sonarqube-Results.PNG)
+![](public/sonarqube.PNG)
