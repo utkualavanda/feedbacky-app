@@ -22,7 +22,9 @@ describe("FeedbackyModal", () => {
     const setOpen = vitest.fn();
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
-    expect(screen.getByTestId("feedbacky-form-input")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("feedbacky-modal-form-input")
+    ).toBeInTheDocument();
   });
 
   it("should show a progress icon when sending the feedback", async () => {
@@ -31,11 +33,11 @@ describe("FeedbackyModal", () => {
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
     await userEvent.type(
-      screen.getByTestId("feedbacky-form-input"),
+      screen.getByTestId("feedbacky-modal-form-input"),
       "test feedback"
     );
 
-    await userEvent.click(screen.getByTestId("feedbacky-form-button"));
+    await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
 
     expect(
       await screen.findByTestId("circular-progress-icon")
@@ -48,13 +50,13 @@ describe("FeedbackyModal", () => {
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
     await userEvent.type(
-      screen.getByTestId("feedbacky-form-input"),
+      screen.getByTestId("feedbacky-modal-form-input"),
       "test feedback"
     );
 
-    await userEvent.click(screen.getByTestId("feedbacky-form-button"));
+    await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
 
-    expect(await screen.findByTestId("feedbacky-form-button")).toBeDisabled();
+    expect(await screen.findByTestId("feedbacky-modal-form-button")).toBeDisabled();
   });
 
   it("should show the success message if the feedback is successfully created", async () => {
@@ -63,7 +65,7 @@ describe("FeedbackyModal", () => {
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
     await userEvent.type(
-      screen.getByTestId("feedbacky-form-input"),
+      screen.getByTestId("feedbacky-modal-form-input"),
       "test feedback"
     );
 
@@ -71,7 +73,7 @@ describe("FeedbackyModal", () => {
       .post(`/feedbackyproject/google_sheets/coESHZWOyTWQHyTv?tabId=Sheet1`)
       .reply(200, {});
 
-    await userEvent.click(screen.getByTestId("feedbacky-form-button"));
+    await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
 
     expect(
       await screen.findByText("WE HAVE GOT YOUR FEEDBACK")
@@ -84,7 +86,7 @@ describe("FeedbackyModal", () => {
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
     await userEvent.type(
-      screen.getByTestId("feedbacky-form-input"),
+      screen.getByTestId("feedbacky-modal-form-input"),
       "test feedback"
     );
 
@@ -92,7 +94,7 @@ describe("FeedbackyModal", () => {
       .post(`/feedbackyproject/google_sheets/coESHZWOyTWQHyTv?tabId=Sheet1`)
       .reply(400);
 
-    await userEvent.click(screen.getByTestId("feedbacky-form-button"));
+    await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
 
     expect(await screen.findByText("SOMETHING WENT WRONG")).toBeInTheDocument();
   });
@@ -102,7 +104,7 @@ describe("FeedbackyModal", () => {
 
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
-    await userEvent.click(screen.getByTestId("feedbacky-form-button"));
+    await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
 
     expect(
       screen.getByText("feedback is a required field")
@@ -114,17 +116,14 @@ describe("FeedbackyModal", () => {
 
     render(<FeedbackyModal open={true} setOpen={setOpen} />);
 
-    await userEvent.type(
-      screen.getByTestId("feedbacky-form-input"),
-      "test feedback"
-    );
+    const input = screen.getByTestId("feedbacky-modal-form-input");
 
-    expect(screen.getByTestId("feedbacky-form-input")).toHaveValue(
-      "test feedback"
-    );
+    await userEvent.type(input, "test feedback");
 
-    await userEvent.click(screen.getByTestId("modal-close-button"));
+    expect(input).toHaveValue("test feedback");
 
-    expect(screen.getByTestId("feedbacky-form-input")).toHaveValue("");
+    await userEvent.click(screen.getByTestId("feedbacky-modal-close-button"));
+
+    expect(input).toHaveValue("");
   });
 });

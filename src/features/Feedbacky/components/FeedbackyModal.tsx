@@ -90,7 +90,7 @@ export const FeedbackyModal = ({ open, setOpen }: FeedbackyModalProps) => {
       <DialogTitle>
         <Stack sx={{ flexDirection: "row", justifyContent: "flex-end" }}>
           <IconButton
-            data-testid="modal-close-button"
+            data-testid="feedbacky-modal-close-button"
             disabled={createFeedback.isLoading}
             sx={{ padding: 0 }}
             onClick={handleCloseModal}
@@ -136,7 +136,7 @@ export const FeedbackyModal = ({ open, setOpen }: FeedbackyModalProps) => {
                         name="feedback"
                         label="Feedback"
                         inputProps={{
-                          "data-testid": "feedbacky-form-input",
+                          "data-testid": "feedbacky-modal-form-input",
                         }}
                         sx={{
                           "& [class*=notched]": {
@@ -163,7 +163,7 @@ export const FeedbackyModal = ({ open, setOpen }: FeedbackyModalProps) => {
               }}
             >
               <Button
-                data-testid="feedbacky-form-button"
+                data-testid="feedbacky-modal-form-button"
                 type="submit"
                 disabled={createFeedback.isLoading}
                 fullWidth
