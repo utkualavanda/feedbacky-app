@@ -70,7 +70,7 @@ describe("FeedbackyModal", () => {
     );
 
     nock("https://v1.nocodeapi.com")
-      .post(`/feedbackyproject/google_sheets/coESHZWOyTWQHyTv?tabId=Sheet1`)
+      .post(`/feedbackyalavanda/google_sheets/HGRnjREveuRLVNod?tabId=Sheet1`)
       .reply(200, {});
 
     await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
@@ -91,7 +91,7 @@ describe("FeedbackyModal", () => {
     );
 
     nock("https://v1.nocodeapi.com")
-      .post(`/feedbackyproject/google_sheets/coESHZWOyTWQHyTv?tabId=Sheet1`)
+      .post(`/feedbackyalavanda/google_sheets/HGRnjREveuRLVNod?tabId=Sheet1`)
       .reply(400);
 
     await userEvent.click(screen.getByTestId("feedbacky-modal-form-button"));
